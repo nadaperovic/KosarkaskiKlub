@@ -1,0 +1,7 @@
+.nav{
+  background:#0057ff; height:64px; padding:0 1.5rem;
+  display:flex; align-items:center; gap:2rem;
+  position:sticky; top:0; z-index:1000;
+}
+.nav a{ color:#fff; text-decoration:none; font-weight:600; }
+.nav a.active{ text-decoration:underline; }

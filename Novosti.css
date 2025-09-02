@@ -1,0 +1,172 @@
+/* ===== POZADINA STRANICE ===== */
+.novosti-page {
+  min-height: 100vh;
+  padding: 56px 16px 80px;
+
+  /* slojevita pozadina */
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #1b3b8f55 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 20%, #0ea5e955 0%, transparent 55%),
+    radial-gradient(700px 700px at 50% 120%, #1e293b 0%, #0b1324 60%, #070d1a 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/*  */
+.novosti-page::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'>\
+  <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter>\
+  <rect width='100%' height='100%' filter='url(%23n)' opacity='.025'/></svg>");
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+
+/* ===== NASLOV ===== */
+.page-title {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto 22px;
+  text-align: center;
+  color: #eaf2ff;
+  font-weight: 900;
+  letter-spacing: .4px;
+  font-size: clamp(28px, 3.2vw, 40px);
+  text-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+/* tanki “highlight” ispod naslova */
+.page-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  margin: 10px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #60a5fa, #22d3ee);
+  box-shadow: 0 8px 20px rgba(96,165,250,.45);
+}
+
+/* ===== LISTA KARTICA ===== */
+.novosti-list {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+}
+
+.novosti-empty {
+  text-align: center;
+  color: #9fb0c9;
+  padding: 24px 0;
+}
+
+/* ===== KARTICA (glass) ===== */
+.novost-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: translateZ(0);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.novost-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 60px rgba(0,0,0,.45);
+  border-color: rgba(255,255,255,.16);
+}
+
+/* cover slika */
+.novost-cover {
+  width: 100%;
+  background: #0f172a;
+  overflow: hidden;
+  max-height: 520px;
+}
+.novost-cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transform-origin: center;
+  transition: transform 7s ease; /* lagani ken-burns */
+}
+.novost-card:hover .novost-cover img {
+  transform: scale(1.04);
+}
+
+/* tijelo kartice */
+.novost-body {
+  padding: 18px 20px 20px;
+}
+
+.novost-title {
+  margin: 0 0 8px;
+  font-weight: 900;
+  color: #bfdbfe;
+  font-size: clamp(18px, 2.4vw, 22px);
+  letter-spacing: .2px;
+}
+
+.novost-text {
+  color: #e5e7eb;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.novost-date {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #9fb0c9;
+}
+
+/* ===== SCROLL REVEAL (ako već koristiš .reveal/.reveal-in u JSX) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.reveal.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== LIGHTBOX (ostaje isto) ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.lightbox img {
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: 10px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.6);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 560px) {
+  .novost-body { padding: 14px; }
+  .novost-title { font-size: 18px; }
+  .novost-text { font-size: 15px; line-height: 1.65; }
+  .novost-cover { max-height: 360px; }
+}
+
